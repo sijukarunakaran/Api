@@ -22,6 +22,7 @@
 		3DB55629228036650029C07A /* APIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB55628228036650029C07A /* APIErrorResponse.swift */; };
 		3DB5562F22803B750029C07A /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB5562E22803B750029C07A /* PostsViewController.swift */; };
 		3DB5563122803B900029C07A /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB5563022803B900029C07A /* PostViewModel.swift */; };
+		3DB55633228050F20029C07A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB55632228050F20029C07A /* ViewModel.swift */; };
 		3DCCE2FE227C4B98002E861F /* GetPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCCE2FD227C4B98002E861F /* GetPosts.swift */; };
 		3DCCE300227C4D04002E861F /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCCE2FF227C4D04002E861F /* Posts.swift */; };
 		3DCCE302227C518B002E861F /* APIHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCCE301227C518B002E861F /* APIHeader.swift */; };
@@ -67,6 +68,7 @@
 		3DB55628228036650029C07A /* APIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorResponse.swift; sourceTree = "<group>"; };
 		3DB5562E22803B750029C07A /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		3DB5563022803B900029C07A /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		3DB55632228050F20029C07A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		3DCCE2FD227C4B98002E861F /* GetPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPosts.swift; sourceTree = "<group>"; };
 		3DCCE2FF227C4D04002E861F /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		3DCCE301227C518B002E861F /* APIHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHeader.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		3DB5562B22803B2E0029C07A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3DB55632228050F20029C07A /* ViewModel.swift */,
 				3DB5563022803B900029C07A /* PostViewModel.swift */,
 			);
 			path = ViewModels;
@@ -350,6 +353,7 @@
 				3DB5562F22803B750029C07A /* PostsViewController.swift in Sources */,
 				3DB5563122803B900029C07A /* PostViewModel.swift in Sources */,
 				0ED164F5225F7AAD00AF6514 /* APIError.swift in Sources */,
+				3DB55633228050F20029C07A /* ViewModel.swift in Sources */,
 				3DB55629228036650029C07A /* APIErrorResponse.swift in Sources */,
 				3DB55627228036150029C07A /* ErrorResponse.swift in Sources */,
 				3DCCE2FE227C4B98002E861F /* GetPosts.swift in Sources */,

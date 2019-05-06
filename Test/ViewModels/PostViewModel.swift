@@ -8,20 +8,6 @@
 
 import UIKit
 
-enum ViewModelState{
-    case loading
-    case error
-    case dataAvailable
-}
-
-protocol ViewModel {
-    associatedtype ResultType: Decodable
-    var error: Error? { get set }
-    var result: ResultType? { get set }
-    var state: ViewModelState { get set }
-    var didChangeState: (()->Void)? { get set }
-}
-
 class PostViewModel: ViewModel {
     public typealias ResultType = Posts
     
