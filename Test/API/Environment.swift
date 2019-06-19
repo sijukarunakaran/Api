@@ -9,8 +9,11 @@
 import UIKit
 
 public enum Environment{
+    
     case development
     case production
+    
+    public static var current: Environment = .development
     
     var accessKey: String{
         switch self {
@@ -21,7 +24,7 @@ public enum Environment{
         }
     }
     
-    var baseUrl: String{
+    private var baseUrl: String{
         switch self {
         case .development:
             return "https://api.unsplash.com"
@@ -30,4 +33,10 @@ public enum Environment{
         }
     }
     
+    public var host: URL{
+        guard let hostUrl = URL(string: self.baseUrl) else {
+            fatalError("Bad base URL")
+        }
+        return hostUrl
+    }
 }

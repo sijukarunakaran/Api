@@ -23,6 +23,9 @@ public struct GetPosts: APIRequest {
     public typealias SuccessResponseType = Posts
     public typealias ErrorResponseType = ErrorResponse
     
+    public var baseEndpointUrl: URL {
+        return Environment.current.host
+    }
     public var method: HTTPMethod{
         return .get
     }
@@ -30,7 +33,7 @@ public struct GetPosts: APIRequest {
     public var body: BodyType? = nil
     
     public var header: APIHeader?{
-        return APIHeader(authentication: APIClient.environment.accessKey, authenticationKey: APIHeader.AuthenticationKey.clientID)
+        return APIHeader(authentication: Environment.current.accessKey, authenticationKey: APIHeader.AuthenticationKey.clientID)
     }
     
     public var resourceName: String {

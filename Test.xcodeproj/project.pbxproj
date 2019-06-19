@@ -129,7 +129,6 @@
 				3DB5562B22803B2E0029C07A /* ViewModels */,
 				3DB5562A22803B040029C07A /* ViewControllers */,
 				3DCCE303227C5E4A002E861F /* Models */,
-				0ED164DF225F7AAD00AF6514 /* Requests */,
 				0E42A29A225E70FB00AEB6A1 /* API */,
 				0E42A270225E70DA00AEB6A1 /* Main.storyboard */,
 				0E42A273225E70DC00AEB6A1 /* Assets.xcassets */,
@@ -160,6 +159,7 @@
 		0E42A29A225E70FB00AEB6A1 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				0ED164DF225F7AAD00AF6514 /* Requests */,
 				3DCCE304227C69F5002E861F /* Environment.swift */,
 				0ED164EA225F7AAD00AF6514 /* APIRequest.swift */,
 				0ED164E8225F7AAD00AF6514 /* APIError.swift */,

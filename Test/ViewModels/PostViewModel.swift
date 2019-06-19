@@ -25,7 +25,7 @@ class PostViewModel: ViewModel {
     
     func getPosts(){
         state = .loading
-        APIClient()?.perform(GetPosts(queryParams: GetPosts.QueryParamsType(page: 1), body: nil), completion: { (response) in
+        APIClient().perform(GetPosts(queryParams: GetPosts.QueryParamsType(page: 1), body: nil), completion: { (response) in
             switch response{
             case .success(let value):
                 self.result = value
