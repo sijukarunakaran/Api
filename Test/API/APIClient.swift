@@ -36,7 +36,7 @@ public class APIClient {
 	public func perform<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T.SuccessResponseType>) {
 		let endpoint = self.endpoint(for: request)
         var urlRequest = URLRequest(url: endpoint)
-//        urlRequest.httpMethod = request.method.rawValue
+        urlRequest.httpMethod = request.method.rawValue
         urlRequest.allHTTPHeaderFields = request.header?.dictionary as? [String : String]
         urlRequest.httpBody = body(for: request)
 		let task = session.dataTask(with: urlRequest) { data, response, error in
