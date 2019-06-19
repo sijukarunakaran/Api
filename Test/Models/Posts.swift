@@ -58,6 +58,7 @@ struct User: Codable {
     let instagramUsername: String?
     let totalCollections, totalLikes, totalPhotos: Int
     let acceptedTos: Bool
+    
 
     enum CodingKeys: String, CodingKey {
         case id

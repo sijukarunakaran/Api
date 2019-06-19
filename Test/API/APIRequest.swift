@@ -10,15 +10,24 @@
 import Foundation
 
 /// All requests must conform to this protocol
-/// - Discussion: You must conform to Encodable too, so that all stored public parameters
-///   of types conforming this protocol will be encoded as parameters.
-public protocol APIRequest: Encodable {
-	/// Response
+public protocol APIRequest {
+	/// Type to decode incoming json
 	associatedtype SuccessResponseType: Decodable
+    /// Type to encapsulate query params
+    associatedtype QueryParamsType: Encodable
+    /// Type to encapsulate body
+    associatedtype BodyType: Encodable
+    ///Error Type
     associatedtype ErrorResponseType: APIErrorResponse
-
+    
+    ///Api http method
+    var method: HTTPMethod { get }
 	/// Endpoint for this request (the last part of the URL)
 	var resourceName: String { get }
-    
-    var header: Encodable? { get }
+    /// Query params
+    var queryParams: QueryParamsType? { set get }
+    /// Request body
+    var body: BodyType? { set get }
+    ///Header fields
+    var header: APIHeader? { get }
 }

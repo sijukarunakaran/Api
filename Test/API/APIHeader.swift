@@ -19,7 +19,12 @@ struct ContentType {
     static var json = "application/json"
 }
 
-struct APIHeader: Encodable {
+public struct APIHeader: Encodable {
+    
+    enum AuthenticationKey: String {
+        case bearer = "Bearer"
+        case clientID = "Client-ID"
+    }
     
     let authentication: String?
     let authenticationKey: String
@@ -34,15 +39,15 @@ struct APIHeader: Encodable {
         case acceptEncoding = "Accept-Encoding"
     }
     
-    init(authentication: String? = nil, authenticationKey: String = "Bearer", contentType: String = ContentType.json, acceptType: String = ContentType.json, acceptEncoding: String? = nil) {
+    init(authentication: String? = nil, authenticationKey: AuthenticationKey = APIHeader.AuthenticationKey.bearer, contentType: String = ContentType.json, acceptType: String = ContentType.json, acceptEncoding: String? = nil) {
         self.authentication = authentication
         self.contentType = contentType
         self.acceptType = acceptType
         self.acceptEncoding = acceptEncoding
-        self.authenticationKey = authenticationKey
+        self.authenticationKey = authenticationKey.rawValue
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if let authorization = authentication{
             try container.encodeIfPresent("\(authenticationKey) \(authorization)", forKey: .authentication)

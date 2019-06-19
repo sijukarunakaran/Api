@@ -36,8 +36,9 @@ public class APIClient {
 	public func perform<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T.SuccessResponseType>) {
 		let endpoint = self.endpoint(for: request)
         var urlRequest = URLRequest(url: endpoint)
+//        urlRequest.httpMethod = request.method.rawValue
         urlRequest.allHTTPHeaderFields = request.header?.dictionary as? [String : String]
-        
+        urlRequest.httpBody = body(for: request)
 		let task = session.dataTask(with: urlRequest) { data, response, error in
 			if let data = data {
                 self.decode(request, data: data, completion: completion)
@@ -50,22 +51,33 @@ public class APIClient {
     
     /// Decode data based on the given request
     private func decode<T: APIRequest>(_ request: T, data: Data, completion: @escaping ResultCallback<T.SuccessResponseType>) {
-            do {
-                // Decode the top level response, and look up the decoded response to see
-                // if it's a success
-                let apiResponse = try JSONDecoder().decode(T.SuccessResponseType.self, from: data)
-                completion(.success(apiResponse))
-                
-            } catch {
-                do {
-                    // if it's  a failure
-                    let errorMessage = try JSONDecoder().decode(T.ErrorResponseType.self, from: data).errorMessage
-                    completion(.failure(APIError.server(message: errorMessage)))
-                    
-                } catch {
-                    completion(.failure(error))
+        
+        let apiResponse = Result{ try JSONDecoder().decode(T.SuccessResponseType.self, from: data) }
+        
+        switch apiResponse {
+            case .success:
+                completion(apiResponse)
+            default:
+                let errorMessage = Result{ try JSONDecoder().decode(T.ErrorResponseType.self, from: data).errorMessage }
+                switch errorMessage {
+                    case .success(let message):
+                        completion(.failure(APIError.server(message: message)))
+                    default:
+                        completion(apiResponse)
                 }
-            }
+        }
+    }
+    
+    /// Encodes request body based on the given request
+    private func body<T: APIRequest>(for request: T) -> Data?{
+        guard let bodyParams = request.body else{
+            return nil
+        }
+        do {
+            return try JSONEncoder().encode(bodyParams)
+        } catch {
+            fatalError("Wrong parameters: \(error)")
+        }
     }
 
 	/// Encodes a URL based on the given request
@@ -85,7 +97,7 @@ public class APIClient {
 		let customQueryItems: [URLQueryItem]
 
 		do {
-			customQueryItems = try URLQueryItemEncoder.encode(request)
+			customQueryItems = try URLQueryItemEncoder.encode(request.queryParams)
 		} catch {
 			fatalError("Wrong parameters: \(error)")
 		}

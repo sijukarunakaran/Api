@@ -22,6 +22,10 @@ class PostsViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         viewModel.didChangeState = viewModelStateChanged
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.getPosts()
     }
     
@@ -42,7 +46,7 @@ class PostsViewController: UITableViewController {
     
     func loadData(){
         DispatchQueue.main.async {
-            self.showLoader(false)
+//            self.showLoader(false)
             self.tableView.reloadData()
         }
     }
@@ -69,7 +73,7 @@ class PostsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = viewModel.result?[indexPath.row].user.firstName
+        cell.textLabel?.text = viewModel.result?[indexPath.row].user.name
 
         return cell
     }
