@@ -8,35 +8,58 @@
 
 import UIKit
 
+protocol HostDetails {
+    var baseURLString: String { get set }
+    var clientID: String? { get set }
+    var clientSecret: String? { get set }
+    var accessKey : String? { get set }
+}
+extension HostDetails {
+    var baseURL: URL {
+        guard let url = URL(string: baseURLString) else {
+            fatalError("Bad Base URL")
+        }
+        return url
+    }
+
+}
+
+public struct Host: HostDetails {
+    
+    var baseURLString: String
+    
+    var clientID: String?
+    
+    var clientSecret: String?
+    
+    var accessKey: String?
+    
+    
+    
+}
 public enum Environment{
     
     case development
     case production
     
+    
     public static var current: Environment = .development
     
-    var accessKey: String{
+    
+    public var host: Host{
         switch self {
         case .development:
-            return "8634366274bd23efb9b023fb9b2c6502e67f7dd5d6a7962b3b49fbee170940f8"
+            return Host(baseURLString: "https://api.unsplash.com",
+                        clientID: nil,
+                        clientSecret: nil,
+                        accessKey: "8634366274bd23efb9b023fb9b2c6502e67f7dd5d6a7962b3b49fbee170940f8")
         case .production:
-            return "8634366274bd23efb9b023fb9b2c6502e67f7dd5d6a7962b3b49fbee170940f8"
+            return Host(baseURLString: "https://api.unsplash.com",
+                        clientID: nil,
+                        clientSecret: nil,
+                        accessKey: "8634366274bd23efb9b023fb9b2c6502e67f7dd5d6a7962b3b49fbee170940f8")
         }
-    }
-    
-    private var baseUrl: String{
-        switch self {
-        case .development:
-            return "https://api.unsplash.com"
-        case .production:
-            return "https://api.unsplash.com"
-        }
-    }
-    
-    public var host: URL{
-        guard let hostUrl = URL(string: self.baseUrl) else {
-            fatalError("Bad base URL")
-        }
-        return hostUrl
     }
 }
+
+

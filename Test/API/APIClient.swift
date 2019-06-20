@@ -19,7 +19,7 @@ public class APIClient {
 
 	/// Sends a request to servers, calling the completion method when finished
 	public func perform<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T.SuccessResponseType>) {
-        var urlRequest = request.urlRequest
+        let urlRequest = request.urlRequest
 		let task = session.dataTask(with: urlRequest) { data, response, error in
 			if let data = data {
                 self.decode(request, data: data, completion: completion)

@@ -36,7 +36,7 @@ public protocol APIRequest {
 }
 
 
-extension APIRequest{
+extension APIRequest {
     
     var urlRequest: URLRequest {
         let endpoint = self.endpoint()
